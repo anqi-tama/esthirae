@@ -4,7 +4,18 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Esthirae | Where Aesthetics Meets Intelligence</title>
-    <!-- Fonts: Manrope (Modern Sans-serif as requested in PRD) -->
+    
+    <!-- Robust Shim for process.env -->
+    <script>
+      window.process = {
+        env: {
+          NODE_ENV: 'production',
+          API_KEY: '' 
+        }
+      };
+    </script>
+
+    <!-- Fonts: Manrope -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -15,21 +26,14 @@
       tailwind.config = {
         theme: {
           extend: {
-            fontFamily: {
-              sans: ['Manrope', 'sans-serif'],
-            },
+            fontFamily: { sans: ['Manrope', 'sans-serif'] },
             colors: {
-              // Primary Colors from PRD
-              ivory: '#faf9f7',       // Background
-              'soft-gold': '#d6b98c', // Accent / KPI
-              lavender: '#c7c3e3',    // Secondary Accent
-              
-              // Functional Colors
-              sage: '#9fc7b2',        // Success
-              amber: '#eac54f',       // Warning (Muted)
-              rose: '#e57373',        // Error (Low saturation)
-              
-              // Text
+              ivory: '#faf9f7',
+              'soft-gold': '#d6b98c',
+              lavender: '#c7c3e3',
+              sage: '#9fc7b2',
+              amber: '#eac54f',
+              rose: '#e57373',
               'text-dark': '#2f2f2f',
               'text-muted': '#8a8a8a',
             },
@@ -37,49 +41,37 @@
               'soft': '0 10px 30px rgba(0,0,0,0.04)',
               'card': '0 4px 20px rgba(0,0,0,0.02)',
             },
-            borderRadius: {
-              'xl': '18px', // radius-lg in PRD
-              'lg': '12px', // radius-md in PRD
-            }
+            borderRadius: { 'xl': '18px', 'lg': '12px' },
+            animation: { 'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite' }
           }
         }
       }
     </script>
     <style>
-      body {
-        background-color: #faf9f7; /* Ivory */
-        color: #2f2f2f;
-      }
-      /* Custom scrollbar for a cleaner look */
-      ::-webkit-scrollbar {
-        width: 6px;
-      }
-      ::-webkit-scrollbar-track {
-        background: transparent;
-      }
-      ::-webkit-scrollbar-thumb {
-        background: #e5e5e5;
-        border-radius: 10px;
-      }
-      ::-webkit-scrollbar-thumb:hover {
-        background: #d6b98c;
-      }
+      body { background-color: #faf9f7; color: #2f2f2f; margin: 0; }
+      ::-webkit-scrollbar { width: 6px; }
+      ::-webkit-scrollbar-thumb { background: #e5e5e5; border-radius: 10px; }
+      .animate-fade-in { animation: fadeIn 0.3s ease-out; }
+      @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
-  <script type="importmap">
+    <script type="importmap">
 {
   "imports": {
-    "react/": "https://esm.sh/react@^19.2.3/",
-    "react": "https://esm.sh/react@^19.2.3",
+    "react": "https://esm.sh/react@19.0.0",
+    "react-dom": "https://esm.sh/react-dom@19.0.0",
+    "react-dom/client": "https://esm.sh/react-dom@19.0.0/client",
+    "react-router-dom": "https://esm.sh/react-router-dom@7.1.1",
+    "lucide-react": "https://esm.sh/lucide-react@0.469.0",
+    "recharts": "https://esm.sh/recharts@3.0.0-beta.10",
+    "@google/genai": "https://esm.sh/@google/genai@0.2.1",
     "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
-    "react-router-dom": "https://esm.sh/react-router-dom@^7.10.1",
-    "lucide-react": "https://esm.sh/lucide-react@^0.561.0",
-    "recharts": "https://esm.sh/recharts@^3.5.1",
-    "react-dom": "https://esm.sh/react-dom@^19.2.3"
+    "react/": "https://esm.sh/react@^19.2.3/"
   }
 }
 </script>
-</head>
+  </head>
   <body>
     <div id="root"></div>
+    <script type="module" src="./index.tsx"></script>
   </body>
 </html>
