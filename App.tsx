@@ -1,32 +1,32 @@
+
 import React, { useState } from 'react';
 import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import Sidebar from './components/Sidebar.tsx';
-import Dashboard from './pages/Dashboard.tsx';
-import Appointments from './pages/Appointments.tsx';
-import AppointmentFormPage from './pages/AppointmentFormPage.tsx';
-import Patients from './pages/Patients.tsx';
-import Treatments from './pages/Treatments.tsx';
-import Cashier from './pages/Cashier.tsx';
-import RetailSales from './pages/RetailSales.tsx';
-import Inventory from './pages/Inventory.tsx';
-import Procedures from './pages/Procedures.tsx'; 
-import CRM from './pages/CRM.tsx';
-import LoyaltyProgram from './pages/LoyaltyProgram.tsx';
-import PromotionEngine from './pages/PromotionEngine.tsx';
-import StaffPage from './pages/Staff.tsx';
-import Reports from './pages/Reports.tsx';
-import PackageMaster from './pages/PackageMaster.tsx';
-import QueueInfoPage from './pages/QueueInfoPage.tsx';
-import QueueMonitor from './pages/QueueMonitor.tsx';
-import QueueTVPage from './pages/QueueTVPage.tsx';
-import Settings from './pages/Settings.tsx';
-import AIConsultant from './components/AIConsultant.tsx';
+import Sidebar from './components/Sidebar';
+import Dashboard from './pages/Dashboard';
+import Appointments from './pages/Appointments';
+import AppointmentFormPage from './pages/AppointmentFormPage'; // New Page
+import Patients from './pages/Patients';
+import Treatments from './pages/Treatments';
+import Cashier from './pages/Cashier';
+import RetailSales from './pages/RetailSales';
+import Inventory from './pages/Inventory';
+import Procedures from './pages/Procedures'; 
+import CRM from './pages/CRM';
+import LoyaltyProgram from './pages/LoyaltyProgram'; // New Page
+import PromotionEngine from './pages/PromotionEngine'; // New Page
+import StaffPage from './pages/Staff';
+import Reports from './pages/Reports';
+import PackageMaster from './pages/PackageMaster';
+import QueueInfoPage from './pages/QueueInfoPage'; // Import new page
+import QueueMonitor from './pages/QueueMonitor'; // Import Queue Monitor
+import QueueTVPage from './pages/QueueTVPage'; // Import TV Page
+import Settings from './pages/Settings'; // New Settings Page
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
 
   return (
-    <div className="flex min-h-screen bg-ivory font-sans relative">
+    <div className="flex min-h-screen bg-ivory font-sans">
       <Sidebar 
         isCollapsed={isSidebarCollapsed} 
         toggleSidebar={() => setIsSidebarCollapsed(!isSidebarCollapsed)} 
@@ -38,8 +38,6 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       >
         {children}
       </main>
-      
-      <AIConsultant />
     </div>
   );
 };
@@ -48,34 +46,47 @@ const App: React.FC = () => {
   return (
     <Router>
       <Routes>
+        {/* Public Routes (No Sidebar) */}
         <Route path="/queue/:id" element={<QueueInfoPage />} />
         <Route path="/queue-tv" element={<QueueTVPage />} />
 
+        {/* Protected Routes (With Sidebar Layout) */}
         <Route path="/*" element={
           <Layout>
             <Routes>
               <Route path="/" element={<Dashboard />} />
+              
               <Route path="/agenda" element={<Appointments />} />
               <Route path="/agenda/new" element={<AppointmentFormPage />} />
               <Route path="/agenda/edit/:id" element={<AppointmentFormPage />} />
+              
               <Route path="/queue-monitor" element={<QueueMonitor />} />
+
               <Route path="/patients" element={<Patients />} />
               <Route path="/treatments" element={<Treatments />} />
+              
+              {/* Split POS Routes */}
               <Route path="/cashier" element={<Cashier />} />
               <Route path="/sales" element={<RetailSales />} />
+              
+              {/* Split Inventory Routes - Pointing to specific views in Inventory Component */}
               <Route path="/inventory" element={<Inventory view="catalog" />} />
               <Route path="/stock" element={<Inventory view="stock" />} />
               <Route path="/purchasing" element={<Inventory view="purchasing" />} />
               <Route path="/opname" element={<Inventory view="opname" />} />
               <Route path="/logs" element={<Inventory view="logs" />} />
+
               <Route path="/services" element={<Procedures />} /> 
               <Route path="/packages" element={<PackageMaster />} />
+              
               <Route path="/crm" element={<CRM />} />
               <Route path="/loyalty" element={<LoyaltyProgram />} />
               <Route path="/promotions" element={<PromotionEngine />} />
+
               <Route path="/staff" element={<StaffPage />} />
               <Route path="/reports" element={<Reports />} />
               <Route path="/settings" element={<Settings />} />
+              
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
           </Layout>
