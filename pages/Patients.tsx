@@ -11,10 +11,10 @@ import {
     ChevronLeft,
     ChevronRight
 } from 'lucide-react';
-import { MOCK_PATIENTS } from '../constants';
-import { Patient } from '../types';
-import PatientDetail from '../components/PatientDetail';
-import PatientForm from '../components/PatientForm';
+import { MOCK_PATIENTS } from '../constants.ts';
+import { Patient } from '../types.ts';
+import PatientDetail from '../components/PatientDetail.tsx';
+import PatientForm from '../components/PatientForm.tsx';
 
 type SortOption = 'newest' | 'name_asc' | 'name_desc';
 type ViewState = 'list' | 'profile_form' | 'emr';

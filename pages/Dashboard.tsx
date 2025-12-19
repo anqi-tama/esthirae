@@ -8,10 +8,10 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from 'recharts';
-import KPICard from '../components/KPICard';
-import { KPI, AppointmentStatus } from '../types';
-import { TODAY_APPOINTMENTS, DOCTOR_COMMISSION_DATA, TOP_REVENUE_TREATMENTS } from '../constants';
-import { DollarSign, TrendingUp, Star } from 'lucide-react';
+import KPICard from '../components/KPICard.tsx';
+import { KPI, AppointmentStatus } from '../types.ts';
+import { TODAY_APPOINTMENTS, DOCTOR_COMMISSION_DATA, TOP_REVENUE_TREATMENTS } from '../constants.ts';
+import { DollarSign, TrendingUp } from 'lucide-react';
 
 const KPIS: KPI[] = [
   { id: '1', label: 'Appointments Today', value: 22, color: 'gold', trend: '+12%', trendDirection: 'up' },
@@ -22,7 +22,6 @@ const KPIS: KPI[] = [
 const Dashboard: React.FC = () => {
   return (
     <div className="space-y-8 animate-fade-in">
-      {/* Header */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
           <h1 className="text-3xl font-medium text-text-dark">Good Morning, Dr. Wijaya ✨</h1>
@@ -30,20 +29,14 @@ const Dashboard: React.FC = () => {
         </div>
       </div>
 
-      {/* KPI Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {KPIS.map((kpi) => (
           <KPICard key={kpi.id} data={kpi} />
         ))}
       </div>
 
-      {/* Main Content Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        
-        {/* Left Col: Analytics (2/3 width on large screens) */}
         <div className="lg:col-span-2 space-y-8">
-          
-          {/* Doctor Commission Estimation */}
           <div className="bg-white p-6 rounded-xl shadow-soft">
             <div className="flex justify-between items-center mb-6">
               <div>
@@ -82,7 +75,7 @@ const Dashboard: React.FC = () => {
                   <Area
                     type="monotone"
                     dataKey="value"
-                    stroke="#9fc7b2" // Sage Green
+                    stroke="#9fc7b2"
                     strokeWidth={3}
                     fillOpacity={1}
                     fill="url(#colorCommission)"
@@ -92,7 +85,6 @@ const Dashboard: React.FC = () => {
             </div>
           </div>
 
-          {/* Top Revenue Treatments (List View) */}
           <div className="bg-white p-6 rounded-xl shadow-soft">
              <div className="flex justify-between items-center mb-6">
               <div>
@@ -119,7 +111,6 @@ const Dashboard: React.FC = () => {
                                 <div className="text-sm font-bold text-soft-gold">Rp {item.revenue.toLocaleString()}</div>
                             </div>
                         </div>
-                        {/* Progress Bar */}
                         <div className="h-2 w-full bg-gray-50 rounded-full overflow-hidden">
                             <div 
                                 className="h-full bg-gradient-to-r from-soft-gold to-[#c5a676] rounded-full"
@@ -130,10 +121,8 @@ const Dashboard: React.FC = () => {
                 ))}
             </div>
           </div>
-
         </div>
 
-        {/* Right Col: Schedule (1/3 width) */}
         <div className="lg:col-span-1">
           <div className="bg-white p-6 rounded-xl shadow-soft h-full">
             <div className="flex justify-between items-center mb-6">
@@ -144,14 +133,6 @@ const Dashboard: React.FC = () => {
             <div className="space-y-0">
               {TODAY_APPOINTMENTS.map((apt, index) => {
                 const isLast = index === TODAY_APPOINTMENTS.length - 1;
-                let statusColor = '';
-                switch(apt.status) {
-                    case AppointmentStatus.CONFIRMED: statusColor = 'bg-lavender text-white'; break;
-                    case AppointmentStatus.IN_TREATMENT: statusColor = 'bg-soft-gold text-white'; break;
-                    case AppointmentStatus.COMPLETED: statusColor = 'bg-sage text-white'; break;
-                    default: statusColor = 'bg-gray-200 text-gray-500';
-                }
-
                 return (
                   <div key={apt.id} className={`flex gap-4 py-4 ${!isLast ? 'border-b border-gray-50' : ''}`}>
                     <div className="flex-shrink-0">
@@ -160,10 +141,7 @@ const Dashboard: React.FC = () => {
                             {parseInt(apt.time.split(':')[0]) < 12 ? 'AM' : 'PM'}
                         </div>
                     </div>
-                    
-                    {/* Timeline Line visual (Optional, simplified here for cleaner card look) */}
                     <div className="w-1 bg-ivory rounded-full"></div>
-
                     <div className="flex-1">
                         <div className="flex justify-between items-start">
                             <h4 className="font-medium text-text-dark">{apt.patientName}</h4>
@@ -186,15 +164,8 @@ const Dashboard: React.FC = () => {
                 );
               })}
             </div>
-            
-            <div className="mt-6 pt-4 border-t border-gray-50 text-center">
-                <button className="text-sm text-text-muted hover:text-text-dark transition-colors">
-                    + 3 more appointments
-                </button>
-            </div>
           </div>
         </div>
-
       </div>
     </div>
   );

@@ -1,12 +1,11 @@
 import React from 'react';
-import { KPI } from '../types';
+import { KPI } from '../types.ts';
 
 interface KPICardProps {
   data: KPI;
 }
 
 const KPICard: React.FC<KPICardProps> = ({ data }) => {
-  // Determine border color based on prop
   const borderClass =
     data.color === 'gold'
       ? 'border-t-soft-gold'
@@ -35,8 +34,6 @@ const KPICard: React.FC<KPICardProps> = ({ data }) => {
         )}
       </div>
       <h2 className="text-3xl font-semibold text-text-dark mt-2">{data.value}</h2>
-      
-      {/* Visual embellishment: Sparkline placeholder */}
       <div className="h-8 w-full mt-4 opacity-30">
         <svg viewBox="0 0 100 20" className="w-full h-full fill-none stroke-current" style={{ color: data.color === 'gold' ? '#d6b98c' : data.color === 'lavender' ? '#c7c3e3' : '#9fc7b2'}}>
            <path d="M0 15 Q 10 5, 20 12 T 40 8 T 60 14 T 80 5 T 100 10" strokeWidth="2" strokeLinecap="round" />

@@ -34,7 +34,11 @@ import {
     Bar,
     Cell
 } from 'recharts';
-import { REVENUE_DATA, TREATMENT_DISTRIBUTION, MOCK_INVOICES, MOCK_WALLET_LOGS } from '../constants';
+/* 
+   FIX: Removed TREATMENT_DISTRIBUTION as it is not exported from constants.ts. 
+   Also removed REVENUE_DATA as it is unused in this file. 
+*/
+import { MOCK_INVOICES, MOCK_WALLET_LOGS } from '../constants';
 import { InvoiceStatus } from '../types';
 
 type ReportTab = 'Dashboard' | 'Transactions' | 'Medical' | 'Inventory' | 'Loyalty';

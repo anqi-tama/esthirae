@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { 
   Plus, 
@@ -9,8 +8,8 @@ import {
   MoreHorizontal 
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { TODAY_APPOINTMENTS } from '../constants';
-import { AppointmentStatus, Appointment } from '../types';
+import { TODAY_APPOINTMENTS } from '../constants.ts';
+import { AppointmentStatus, Appointment } from '../types.ts';
 
 const Appointments: React.FC = () => {
   const navigate = useNavigate();

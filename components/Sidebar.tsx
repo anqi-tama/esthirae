@@ -1,8 +1,7 @@
-
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ChevronLeft, ChevronRight, Menu } from 'lucide-react';
-import { MENU_GROUPS } from '../constants';
+import { MENU_GROUPS } from '../constants.ts';
 
 interface SidebarProps {
   isCollapsed: boolean;
@@ -19,7 +18,6 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, toggleSidebar }) => {
         isCollapsed ? 'w-20' : 'w-64'
       }`}
     >
-      {/* Brand Logo & Toggle */}
       <div className={`flex items-center justify-between p-6 ${isCollapsed ? 'flex-col gap-4 px-2' : ''}`}>
         <div className={`transition-opacity duration-300 ${isCollapsed ? 'hidden' : 'block'}`}>
           <h1 className="text-2xl font-semibold tracking-wide text-soft-gold">
@@ -30,7 +28,6 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, toggleSidebar }) => {
           </p>
         </div>
         
-        {/* Collapsed Logo Variant */}
         {isCollapsed && (
            <div className="w-10 h-10 bg-soft-gold rounded-xl flex items-center justify-center text-white font-serif font-bold text-xl">
              E
@@ -45,17 +42,14 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, toggleSidebar }) => {
         </button>
       </div>
 
-      {/* Navigation */}
       <nav className="flex-1 px-3 py-2 space-y-6 overflow-y-auto custom-scrollbar overflow-x-hidden">
         {MENU_GROUPS.map((group, index) => (
           <div key={index}>
-            {/* Group Label - Only visible when expanded */}
             {group.label && group.label !== 'Main' && !isCollapsed && (
-              <h3 className="text-xs font-bold text-text-muted uppercase tracking-wider mb-2 px-4 mt-2 fade-in">
+              <h3 className="text-xs font-bold text-text-muted uppercase tracking-wider mb-2 px-4 mt-2">
                 {group.label}
               </h3>
             )}
-            {/* Group Separator for Collapsed Mode */}
             {group.label && group.label !== 'Main' && isCollapsed && (
                <div className="h-px w-8 bg-gray-100 mx-auto my-3"></div>
             )}
@@ -91,7 +85,6 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, toggleSidebar }) => {
         ))}
       </nav>
 
-      {/* User / Footer */}
       <div className="p-4 border-t border-gray-100 bg-white">
         <div className={`flex items-center gap-3 ${isCollapsed ? 'justify-center' : ''}`}>
           <img
